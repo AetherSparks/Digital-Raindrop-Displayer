@@ -220,10 +220,26 @@ export default function SolutionPage() {
                       [&::-moz-range-thumb]:transition-all
                       [&::-moz-range-thumb]:hover:bg-emerald-300"
                     style={{
-                      background: `linear-gradient(to right, rgb(16 185 129 / 0.5) 0%, rgb(16 185 129 / 0.5) ${(currentTimestamp / maxTimestamp) * 100}%, rgb(16 185 129 / 0.2) ${(currentTimestamp / maxTimestamp) * 100}%, rgb(16 185 129 / 0.2) 100%)`
+                      background: `linear-gradient(to right, rgb(16 185 129 / 0.5) 0%, rgb(16 185 129 / 0.5) ${((currentTimestamp - 1) / (maxTimestamp - 1)) * 100}%, rgb(16 185 129 / 0.2) ${((currentTimestamp - 1) / (maxTimestamp - 1)) * 100}%, rgb(16 185 129 / 0.2) 100%)`
                     }}
                   />
-                  <div className="flex justify-between mt-2">
+                  {/* Timestamp Markers */}
+                  <div className="relative w-full h-6 mt-1">
+                    {Array.from({ length: maxTimestamp }, (_, i) => (
+                      <div
+                        key={i}
+                        className="absolute transform -translate-x-1/2"
+                        style={{
+                          left: `${(i / (maxTimestamp - 1)) * 100}%`,
+                          top: 0
+                        }}
+                      >
+                        <div className="w-px h-2 bg-emerald-500/30"></div>
+                        <div className="text-xs text-emerald-400/70 mt-1">{i + 1}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex justify-between mt-4">
                     <button 
                       onClick={() => setCurrentTimestamp(prev => Math.max(1, prev - 1))}
                       className="px-2 py-1 text-sm rounded bg-emerald-900/60 hover:bg-emerald-800/70 transition-all"
