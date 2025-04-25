@@ -20,7 +20,7 @@ export default function Home() {
           </div>
           <div className="flex items-center space-x-6 text-sm font-mono">
             <Link href="/" className="hover:text-emerald-300 hover:underline underline-offset-4">Home</Link>
-            <Link href="/solution" className="hover:text-emerald-300 hover:underline underline-offset-4">Demo</Link>
+            <Link href="/input" className="hover:text-emerald-300 hover:underline underline-offset-4">Demo</Link>
             <Link href="https://github.com/AetherSparks/Digital-Raindrop-Displayer" target="_blank" className="hover:text-emerald-300 hover:underline underline-offset-4">GitHub</Link>
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function Home() {
             <p className="text-lg md:text-xl text-emerald-300/90 mb-8 font-mono">
               Visualizing and solving the matrix rain problem
             </p>
-            <Link href="/solution" className="inline-block px-8 py-3 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all hover:shadow-lg hover:shadow-emerald-800/30">
+            <Link href="/input" className="inline-block px-8 py-3 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all hover:shadow-lg hover:shadow-emerald-800/30">
               Try The Simulator
             </Link>
           </div>
@@ -177,7 +177,7 @@ export default function Home() {
               &copy; {new Date().getFullYear()} Team 78. All rights reserved.
             </div>
             <div className="mt-4 md:mt-0">
-              <Link href="/solution" className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300">
+              <Link href="/input" className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300">
                 Try The Solution
               </Link>
             </div>
