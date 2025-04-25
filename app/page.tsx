@@ -14,8 +14,8 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
-                <img src="/favicon.ico" alt="Logo" className="w-6 h-6" />
+              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50 p-1.5">
+                <img src="/favicon.ico" alt="Logo" className="w-full h-full object-contain" />
               </div>
               <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
                 Digital Rainfall
