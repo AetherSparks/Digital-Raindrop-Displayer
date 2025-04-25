@@ -26,8 +26,26 @@ export default function InputPage() {
   };
 
   const handleCreateMatrix = () => {
-    // TODO: Validate and process data before redirecting
-    router.push('/solution');
+    try {
+      const lines = inputData.trim().split('\n');
+      const [N, M] = lines[0].split(' ').map(Number);
+      const drops = [];
+      
+      for (let i = 1; i <= M; i++) {
+        const [timestamp, column] = lines[i].split(' ').map(Number);
+        drops.push({ timestamp, column });
+      }
+
+      // Store the processed data
+      localStorage.setItem('raindropData', JSON.stringify({
+        columns: N,
+        drops: drops
+      }));
+      
+      router.push('/solution');
+    } catch (error) {
+      alert('Invalid input format. Please check your data.');
+    }
   };
 
   return (
@@ -121,7 +139,7 @@ export default function InputPage() {
                 onClick={handleCreateMatrix}
                 className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all"
               >
-                Create Matrix
+                Process Data
               </button>
             </div>
           </div>
