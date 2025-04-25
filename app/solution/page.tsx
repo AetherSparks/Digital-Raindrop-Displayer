@@ -202,15 +202,9 @@ export default function SolutionPage() {
           <div className="flex justify-between">
             <Link 
               href="/input" 
-              className="px-6 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all"
+              className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm"
             >
               Try Another Input
-            </Link>
-            <Link 
-              href="/" 
-              className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all"
-            >
-              Back to Home
             </Link>
           </div>
         </div>

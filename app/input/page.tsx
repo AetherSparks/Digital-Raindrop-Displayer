@@ -1,9 +1,9 @@
 "use client";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import MatrixRain from '../components/MatrixRain';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import MatrixRain from "../components/MatrixRain";
 
 export default function InputPage() {
   const router = useRouter();
@@ -20,30 +20,47 @@ export default function InputPage() {
       const column = Math.floor(Math.random() * columns) + 1; // Random column between 1-N
       data.push(`${timestamp} ${column}`);
     }
-    
-    setInputData(data.join('\n'));
+
+    setInputData(data.join("\n"));
   };
 
   const handleCreateMatrix = () => {
     try {
-      const lines = inputData.trim().split('\n');
-      const [N, M] = lines[0].split(' ').map(Number);
-      const drops = [];
-      
-      for (let i = 1; i <= M; i++) {
-        const [timestamp, column] = lines[i].split(' ').map(Number);
-        drops.push({ timestamp, column });
+      const lines = inputData.trim().split("\n");
+      const dropsData = [];
+
+      // Parse each line for timestamp and column
+      for (let i = 0; i < lines.length; i++) {
+        const [timestamp, column] = lines[i].split(" ").map(Number);
+        if (isNaN(timestamp) || isNaN(column)) {
+          throw new Error("Invalid data format");
+        }
+        if (column > columns) {
+          throw new Error(`Column number ${column} exceeds the maximum columns (${columns})`);
+        }
+        if (timestamp < 1) {
+          throw new Error("Timestamp must be greater than 0");
+        }
+        dropsData.push({ timestamp, column });
       }
 
-      // Store the processed data
-      localStorage.setItem('raindropData', JSON.stringify({
-        columns: N,
-        drops: drops
-      }));
-      
-      router.push('/solution');
+      // Validate number of drops matches the input
+      if (dropsData.length !== drops) {
+        throw new Error(`Expected ${drops} drops but found ${dropsData.length} entries`);
+      }
+
+      // Store the processed data using the values from dropdowns
+      localStorage.setItem(
+        "raindropData",
+        JSON.stringify({
+          columns: columns,
+          drops: dropsData,
+        })
+      );
+
+      router.push("/solution");
     } catch (error) {
-      alert('Invalid input format. Please check your data.');
+      alert(error instanceof Error ? error.message : "Invalid input format. Please check your data.");
     }
   };
 
@@ -68,23 +85,43 @@ export default function InputPage() {
             </Link>
           </div>
           <div className="flex items-center space-x-6 text-sm font-mono">
-            <Link href="/" className="hover:text-emerald-300 hover:underline underline-offset-4">Home</Link>
-            <Link href="/input" className="hover:text-emerald-300 hover:underline underline-offset-4">Demo</Link>
-            <Link href="https://github.com/AetherSparks/Digital-Raindrop-Displayer" target="_blank" className="hover:text-emerald-300 hover:underline underline-offset-4">GitHub</Link>
+            <Link
+              href="/"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              Home
+            </Link>
+            <Link
+              href="/input"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              Demo
+            </Link>
+            <Link
+              href="https://github.com/AetherSparks/Digital-Raindrop-Displayer"
+              target="_blank"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              GitHub
+            </Link>
           </div>
         </div>
       </nav>
 
       <main className="flex-grow z-10 container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto bg-black/50 backdrop-blur-sm border border-emerald-800/50 rounded-lg p-6 shadow-lg">
-          <h1 className="text-3xl font-mono font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">Input Data</h1>
-          
+          <h1 className="text-3xl font-mono font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
+            Input Data
+          </h1>
+
           <div className="space-y-6">
             {/* Number Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="font-mono">
-                <label className="block text-emerald-300 mb-2">Number of Columns</label>
-                <input 
+                <label className="block text-emerald-300 mb-2">
+                  Number of Columns
+                </label>
+                <input
                   type="number"
                   min="1"
                   value={columns}
@@ -96,8 +133,10 @@ export default function InputPage() {
                 />
               </div>
               <div className="font-mono">
-                <label className="block text-emerald-300 mb-2">Number of Raindrops</label>
-                <input 
+                <label className="block text-emerald-300 mb-2">
+                  Number of Raindrops
+                </label>
+                <input
                   type="number"
                   min="1"
                   value={drops}
@@ -113,28 +152,36 @@ export default function InputPage() {
             {/* Data Input */}
             <div className="font-mono">
               <div className="flex justify-between items-center mb-2">
-                <label className="text-emerald-300">Enter Data (or use random generator)</label>
-                <button 
+                <label className="text-emerald-300">
+                  Enter Data (or use random generator)
+                </label>
+                <button
                   onClick={generateRandomData}
                   className="px-4 py-1 text-sm rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all"
                 >
                   Generate Random Data
                 </button>
               </div>
-              <textarea 
+              <textarea
                 value={inputData}
                 onChange={(e) => setInputData(e.target.value)}
                 className="w-full h-48 bg-black/40 border border-emerald-800/30 rounded-lg p-4 text-emerald-300 font-mono focus:border-emerald-600/50 focus:outline-none"
-                placeholder="Format:&#13;&#10;timestamp1 column1&#13;&#10;timestamp2 column2&#13;&#10;timestamp3 column3&#13;&#10;..."
+                placeholder={`Format:
+timestamp1 column1
+timestamp2 column2
+timestamp3 column3`}
               />
             </div>
 
             {/* Action Buttons */}
             <div className="flex justify-between items-center">
-              <Link href="/" className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm">
+              <Link
+                href="/"
+                className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm"
+              >
                 Back to Home
               </Link>
-              <button 
+              <button
                 onClick={handleCreateMatrix}
                 className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all"
               >
@@ -152,16 +199,23 @@ export default function InputPage() {
             <div className="mb-4 md:mb-0">
               <Link href="/" className="flex items-center">
                 <div className="w-6 h-6 rounded-full bg-emerald-900/40 flex items-center justify-center border border-emerald-700/50 mr-2">
-                  <span className="text-emerald-400 font-mono text-xs font-bold">78</span>
+                  <span className="text-emerald-400 font-mono text-xs font-bold">
+                    78
+                  </span>
                 </div>
-                <span className="text-sm font-mono font-bold tracking-wider text-emerald-400">Digital Rainfall</span>
+                <span className="text-sm font-mono font-bold tracking-wider text-emerald-400">
+                  Digital Rainfall
+                </span>
               </Link>
             </div>
             <div className="text-xs text-emerald-400/60 font-mono">
               &copy; {new Date().getFullYear()} Team 78. All rights reserved.
             </div>
             <div className="mt-4 md:mt-0">
-              <Link href="/solution" className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300">
+              <Link
+                href="/solution"
+                className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300"
+              >
                 Try The Solution
               </Link>
             </div>
