@@ -14,15 +14,19 @@ interface ProcessedData {
   drops: RaindropData[];
 }
 
+interface SolutionData {
+  maxColumns: number;
+  solutions: Array<{
+    timestamp: number;
+    columns: number[];
+  }>;
+}
+
 export default function SolutionPage() {
   const [data, setData] = useState<ProcessedData | null>(null);
   const [currentTimestamp, setCurrentTimestamp] = useState<number>(1);
   const [maxTimestamp, setMaxTimestamp] = useState<number>(1);
-  const [solution, setSolution] = useState<{
-    maxColumns: number;
-    timestamp: number;
-    columns: number[];
-  } | null>(null);
+  const [solution, setSolution] = useState<SolutionData | null>(null);
 
   useEffect(() => {
     // Load data from localStorage
@@ -46,23 +50,28 @@ export default function SolutionPage() {
         timestampMap.get(drop.timestamp)?.add(drop.column);
       });
       
-      // Find timestamp with maximum unique columns
+      // Find all timestamps with maximum unique columns
       let maxColumns = 0;
-      let maxTimestamp = 1;
-      let maxColumnsList: number[] = [];
+      const solutions: Array<{ timestamp: number; columns: number[] }> = [];
       
       timestampMap.forEach((columns, timestamp) => {
-        if (columns.size > maxColumns) {
-          maxColumns = columns.size;
-          maxTimestamp = timestamp;
-          maxColumnsList = Array.from(columns);
+        if (columns.size >= maxColumns) {
+          if (columns.size > maxColumns) {
+            // New maximum found, clear previous solutions
+            solutions.length = 0;
+            maxColumns = columns.size;
+          }
+          // Add this solution
+          solutions.push({
+            timestamp,
+            columns: Array.from(columns)
+          });
         }
       });
       
       setSolution({
         maxColumns,
-        timestamp: maxTimestamp,
-        columns: maxColumnsList
+        solutions: solutions.sort((a, b) => a.timestamp - b.timestamp)
       });
     }
   }, []);
@@ -78,6 +87,7 @@ export default function SolutionPage() {
   if (!data) {
     return (
       <div className="min-h-screen bg-black text-emerald-400 flex flex-col items-center justify-center p-4">
+        <h1 className="text-3xl font-mono font-bold mb-6">Digital Rainfall Solution</h1>
         <p className="text-emerald-300 mb-8">No data available. Please generate input data first.</p>
         <Link href="/input" className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono">
           Generate Input
@@ -184,16 +194,16 @@ export default function SolutionPage() {
                   Maximum number of simultaneous raindrops: {' '}
                   <span className="text-emerald-300 font-bold">{solution.maxColumns}</span>
                 </p>
-                <p>
-                  This occurs at timestamp {' '}
-                  <span className="text-emerald-300 font-bold">{solution.timestamp}</span>
-                </p>
-                <p>
-                  Columns receiving raindrops: {' '}
-                  <span className="text-emerald-300 font-bold">
-                    {solution.columns.sort((a, b) => a - b).join(', ')}
-                  </span>
-                </p>
+                <p className="font-bold text-emerald-300">Solutions:</p>
+                <div className="space-y-2">
+                  {solution.solutions.map((sol, index) => (
+                    <div key={index} className="pl-4 border-l-2 border-emerald-800/30">
+                      <p>
+                        Timestamp {sol.timestamp}: Columns {sol.columns.sort((a, b) => a - b).join(', ')}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}

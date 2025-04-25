@@ -8,7 +8,7 @@ import MatrixRain from "../components/MatrixRain";
 export default function InputPage() {
   const router = useRouter();
   const [columns, setColumns] = useState<number>(5);
-  const [drops, setDrops] = useState<number>(6);
+  const [drops, setDrops] = useState<number>(5);
   const [inputData, setInputData] = useState<string>("");
 
   const generateRandomData = () => {
@@ -38,8 +38,8 @@ export default function InputPage() {
         data.push(`${timestamp} ${column}`);
       }
     }
-    
-    setInputData(data.join('\n'));
+
+    setInputData(data.join("\n"));
   };
 
   const handleCreateMatrix = () => {
@@ -54,7 +54,9 @@ export default function InputPage() {
           throw new Error("Invalid data format");
         }
         if (column > columns) {
-          throw new Error(`Column number ${column} exceeds the maximum columns (${columns})`);
+          throw new Error(
+            `Column number ${column} exceeds the maximum columns (${columns})`
+          );
         }
         if (timestamp < 1) {
           throw new Error("Timestamp must be greater than 0");
@@ -64,7 +66,9 @@ export default function InputPage() {
 
       // Validate number of drops matches the input
       if (dropsData.length !== drops) {
-        throw new Error(`Expected ${drops} drops but found ${dropsData.length} entries`);
+        throw new Error(
+          `Expected ${drops} drops but found ${dropsData.length} entries`
+        );
       }
 
       // Store the processed data using the values from dropdowns
@@ -78,7 +82,11 @@ export default function InputPage() {
 
       router.push("/solution");
     } catch (error) {
-      alert(error instanceof Error ? error.message : "Invalid input format. Please check your data.");
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Invalid input format. Please check your data."
+      );
     }
   };
 
