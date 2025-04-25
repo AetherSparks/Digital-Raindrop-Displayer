@@ -267,9 +267,7 @@ export default function Home() {
             <div className="mb-4 md:mb-0">
               <Link href="/" className="flex items-center">
                 <div className="w-6 h-6 rounded-full bg-emerald-900/40 flex items-center justify-center border border-emerald-700/50 mr-2">
-                  <span className="text-emerald-400 font-mono text-xs font-bold">
-                    78
-                  </span>
+                  <img src="/favicon.ico" alt="Logo" className="w-4 h-4" />
                 </div>
                 <span className="text-sm font-mono font-bold tracking-wider text-emerald-400">
                   Digital Rainfall

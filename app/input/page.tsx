@@ -109,7 +109,7 @@ export default function InputPage() {
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
-                <span className="text-emerald-400 font-mono font-bold">78</span>
+                <img src="/favicon.ico" alt="Logo" className="w-6 h-6" />
               </div>
               <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
                 Digital Rainfall
@@ -245,9 +245,7 @@ timestamp3 column3`}
             <div className="mb-4 md:mb-0">
               <Link href="/" className="flex items-center">
                 <div className="w-6 h-6 rounded-full bg-emerald-900/40 flex items-center justify-center border border-emerald-700/50 mr-2">
-                  <span className="text-emerald-400 font-mono text-xs font-bold">
-                    78
-                  </span>
+                  <img src="/favicon.ico" alt="Logo" className="w-4 h-4" />
                 </div>
                 <span className="text-sm font-mono font-bold tracking-wider text-emerald-400">
                   Digital Rainfall
