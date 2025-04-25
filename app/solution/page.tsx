@@ -143,24 +143,35 @@ export default function SolutionPage() {
                       <div 
                         key={i}
                         className={`relative flex items-center justify-center ${
-                          hasRaindrop ? 'bg-emerald-500/10' : 'bg-black/20'
+                          hasRaindrop ? 'bg-emerald-500/30 backdrop-blur-sm shadow-[inset_0_0_40px_rgba(16,185,129,0.3)]' : 'bg-black/20'
                         } transition-all duration-300`}
                       >
                         {/* Column Number */}
-                        <span className="absolute top-2 opacity-50 text-xs">
+                        <span className="absolute top-2 opacity-70 text-base font-mono">
                           {i + 1}
                         </span>
                         
                         {/* Raindrop */}
                         {hasRaindrop && (
                           <div className="relative">
-                            {/* Glow effect */}
-                            <div className="absolute inset-0 blur-md bg-emerald-500/30 rounded-full" />
-                            {/* Raindrop circle */}
-                            <div className="w-4 h-4 rounded-full bg-gradient-to-b from-emerald-400 to-emerald-600 shadow-lg shadow-emerald-500/50 relative">
-                              {/* Shine effect */}
-                              <div className="absolute top-0.5 left-0.5 w-2 h-2 rounded-full bg-emerald-300/50" />
+                            {/* Pulsing Aura Rings */}
+                            <div className="absolute -inset-8 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]">
+                              <div className="absolute inset-0 rounded-full bg-emerald-400/10" />
                             </div>
+                            <div className="absolute -inset-6 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite_500ms]">
+                              <div className="absolute inset-0 rounded-full bg-emerald-400/20" />
+                            </div>
+                            {/* Outer glow */}
+                            <div className="absolute -inset-4 blur-xl bg-emerald-500/20 rounded-full animate-[pulse_3s_ease-in-out_infinite]" />
+                            {/* Inner glow */}
+                            <div className="absolute -inset-2 blur-md bg-emerald-400/30 rounded-full animate-[pulse_2.5s_ease-in-out_infinite]" />
+                            {/* Raindrop circle */}
+                            <div className="w-5 h-5 rounded-full bg-gradient-to-b from-emerald-300 to-emerald-600 shadow-lg shadow-emerald-500/50 relative">
+                              {/* Shine effect */}
+                              <div className="absolute top-0.5 left-0.5 w-2 h-2 rounded-full bg-emerald-200/70 animate-[pulse_2s_ease-in-out_infinite]" />
+                            </div>
+                            {/* Bottom reflection */}
+                            <div className="absolute -bottom-8 w-5 h-5 bg-emerald-500/20 rounded-full blur-md transform scale-y-50 animate-[pulse_3s_ease-in-out_infinite]" />
                           </div>
                         )}
                       </div>
@@ -182,11 +193,50 @@ export default function SolutionPage() {
                     max={maxTimestamp}
                     value={currentTimestamp}
                     onChange={(e) => setCurrentTimestamp(Number(e.target.value))}
-                    className="w-full h-2 bg-emerald-900/30 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                    className="w-full h-2 bg-emerald-900/30 rounded-lg appearance-none cursor-pointer 
+                      focus:outline-none focus:ring-2 focus:ring-emerald-500/50
+                      [&::-webkit-slider-thumb]:appearance-none
+                      [&::-webkit-slider-thumb]:w-4
+                      [&::-webkit-slider-thumb]:h-4
+                      [&::-webkit-slider-thumb]:rounded-full
+                      [&::-webkit-slider-thumb]:bg-emerald-400
+                      [&::-webkit-slider-thumb]:cursor-pointer
+                      [&::-webkit-slider-thumb]:border-2
+                      [&::-webkit-slider-thumb]:border-emerald-600
+                      [&::-webkit-slider-thumb]:shadow-lg
+                      [&::-webkit-slider-thumb]:shadow-emerald-500/30
+                      [&::-webkit-slider-thumb]:transition-all
+                      [&::-webkit-slider-thumb]:hover:bg-emerald-300
+                      [&::-moz-range-thumb]:appearance-none
+                      [&::-moz-range-thumb]:w-4
+                      [&::-moz-range-thumb]:h-4
+                      [&::-moz-range-thumb]:rounded-full
+                      [&::-moz-range-thumb]:bg-emerald-400
+                      [&::-moz-range-thumb]:cursor-pointer
+                      [&::-moz-range-thumb]:border-2
+                      [&::-moz-range-thumb]:border-emerald-600
+                      [&::-moz-range-thumb]:shadow-lg
+                      [&::-moz-range-thumb]:shadow-emerald-500/30
+                      [&::-moz-range-thumb]:transition-all
+                      [&::-moz-range-thumb]:hover:bg-emerald-300"
                     style={{
                       background: `linear-gradient(to right, rgb(16 185 129 / 0.5) 0%, rgb(16 185 129 / 0.5) ${(currentTimestamp / maxTimestamp) * 100}%, rgb(16 185 129 / 0.2) ${(currentTimestamp / maxTimestamp) * 100}%, rgb(16 185 129 / 0.2) 100%)`
                     }}
                   />
+                  <div className="flex justify-between mt-2">
+                    <button 
+                      onClick={() => setCurrentTimestamp(prev => Math.max(1, prev - 1))}
+                      className="px-2 py-1 text-sm rounded bg-emerald-900/60 hover:bg-emerald-800/70 transition-all"
+                    >
+                      &lt; Prev
+                    </button>
+                    <button 
+                      onClick={() => setCurrentTimestamp(prev => Math.min(maxTimestamp, prev + 1))}
+                      className="px-2 py-1 text-sm rounded bg-emerald-900/60 hover:bg-emerald-800/70 transition-all"
+                    >
+                      Next &gt;
+                    </button>
+                  </div>
                 </div>
               </div>
 
