@@ -28,9 +28,9 @@ export default function InputPage() {
               <Link href="/" className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm">
                 Back to Home
               </Link>
-              <button className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all">
+              <Link href="/solution" className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all">
                 Process Data
-              </button>
+              </Link>
             </div>
           </div>
         </div>
