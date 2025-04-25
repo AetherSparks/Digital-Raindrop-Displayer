@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, PerspectiveCamera, Environment, Float } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
-import * as THREE from 'three';
+import { useRef, useMemo } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { PerspectiveCamera, Float } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import * as THREE from "three";
 
 function Raindrops({ count = 100 }) {
   const mesh = useRef<THREE.Points>(null);
@@ -12,9 +12,9 @@ function Raindrops({ count = 100 }) {
     const pos = [];
     for (let i = 0; i < count; i++) {
       pos.push(
-        Math.random() * 20 - 10,  // x
-        Math.random() * 20,       // y
-        Math.random() * 20 - 10   // z
+        Math.random() * 20 - 10, // x
+        Math.random() * 20, // y
+        Math.random() * 20 - 10 // z
       );
     }
     return new Float32Array(pos);
@@ -83,12 +83,8 @@ export default function RaindropScene() {
     <div className="absolute inset-0">
       <Canvas>
         <PerspectiveCamera makeDefault position={[0, 0, 15]} />
-        <color attach="background" args={['transparent']} />
-        <Float
-          speed={1}
-          rotationIntensity={0.5}
-          floatIntensity={0.5}
-        >
+        <color attach="background" args={["transparent"]} />
+        <Float speed={1} rotationIntensity={0.5} floatIntensity={0.5}>
           <Raindrops />
         </Float>
         <EffectComposer>

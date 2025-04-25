@@ -119,22 +119,34 @@ export default function Home() {
                 <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Abhiraj Ghose
                 </h3>
-                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">e23cseu0014</p>
-                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">Team Leader</p>
+                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
+                  e23cseu0014
+                </p>
+                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
+                  Team Leader
+                </p>
               </div>
               <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
                 <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Pallav Sharma
                 </h3>
-                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">e23cseu0022</p>
-                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">Team Member</p>
+                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
+                  e23cseu0022
+                </p>
+                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
+                  Team Member
+                </p>
               </div>
               <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
                 <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Shivam Jain
                 </h3>
-                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">e23cseu0017</p>
-                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">Team Member</p>
+                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
+                  e23cseu0017
+                </p>
+                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
+                  Team Member
+                </p>
               </div>
             </div>
           </section>
@@ -171,7 +183,9 @@ export default function Home() {
                   href="/input"
                   className="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm group hover:shadow-lg hover:shadow-emerald-900/30"
                 >
-                  <span className="group-hover:text-emerald-300 transition-colors">Try the interactive demo</span>
+                  <span className="group-hover:text-emerald-300 transition-colors">
+                    Try the interactive demo
+                  </span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform"
@@ -252,7 +266,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold text-emerald-300">Presentation</h3>
-                  <p className="text-sm text-emerald-200/70">View our project presentation</p>
+                  <p className="text-sm text-emerald-200/70">
+                    View our project presentation
+                  </p>
                 </div>
               </a>
             </div>
