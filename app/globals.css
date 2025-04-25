@@ -26,8 +26,7 @@ body {
 }
 
 
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@tailwind base;
 @tailwind utilities;
 
 :root {
