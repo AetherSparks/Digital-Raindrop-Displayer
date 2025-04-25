@@ -23,7 +23,7 @@ export default function CopyableCode({ code, language }: CopyableCodeProps) {
   return (
     <pre className="relative group">
       <div className="absolute inset-0 bg-emerald-900/20 backdrop-blur-md rounded-lg border border-emerald-600/20 transition-all duration-300 group-hover:bg-emerald-900/30 group-hover:border-emerald-600/30"></div>
-      <code className="block p-4 relative text-sm overflow-auto font-mono text-emerald-300/90">
+      <code className={`block p-4 relative text-sm overflow-auto font-mono text-emerald-300/90 ${language ? `language-${language}` : ''}`}>
         {code}
       </code>
       <button

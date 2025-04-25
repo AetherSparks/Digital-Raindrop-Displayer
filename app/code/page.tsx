@@ -3,6 +3,7 @@
 import { useState } from "react";
 import MatrixRain from "../components/MatrixRain";
 import Link from "next/link";
+import Image from "next/image";
 import CopyableCode from "../components/CopyableCode";
 
 type ViewType = "Steps" | "PseudoCode" | "TypeScript" | "Python" | "Java" | "C++" | "Rust";
@@ -63,11 +64,11 @@ For each timestamp, columns in timestampMap:
 
 interface Solution {
   timestamp: number;
-  columns: number[];
+  columns: number[]; 
 }
 
 function findMaxColumns(data: RaindropData[]): Solution[] {
-  const timestampMap = new Map<number, Set<number>>();
+  const timestampMap = new Map<number, Set<number>>(); 
   
   // Group drops by timestamp
   data.forEach(drop => {
@@ -243,7 +244,7 @@ fn find_max_columns(drops: &[Raindrop]) -> Vec<Solution> {
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
-                <img src="/favicon.ico" alt="Logo" className="w-6 h-6" />
+                <Image src="/favicon.ico" alt="Logo" width={24} height={24} />
               </div>
               <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
                 Digital Rainfall
@@ -311,7 +312,7 @@ fn find_max_columns(drops: &[Raindrop]) -> Vec<Solution> {
             <div className="mb-4 md:mb-0">
               <Link href="/" className="flex items-center">
                 <div className="w-6 h-6 rounded-full bg-emerald-900/40 flex items-center justify-center border border-emerald-700/50 mr-2">
-                  <img src="/favicon.ico" alt="Logo" className="w-4 h-4" />
+                  <Image src="/favicon.ico" alt="Logo" width={16} height={16} />
                 </div>
                 <span className="text-sm font-mono font-bold tracking-wider text-emerald-400">
                   Digital Rainfall
