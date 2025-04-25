@@ -37,6 +37,27 @@ export default function InputPage() {
         <MatrixRain />
       </div>
 
+      {/* Navbar */}
+      <nav className="sticky top-0 z-20 bg-black/70 backdrop-blur-sm border-b border-emerald-500/30 shadow-lg shadow-emerald-500/10">
+        <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
+                <span className="text-emerald-400 font-mono font-bold">78</span>
+              </div>
+              <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
+                Digital Rainfall
+              </span>
+            </Link>
+          </div>
+          <div className="flex items-center space-x-6 text-sm font-mono">
+            <Link href="/" className="hover:text-emerald-300 hover:underline underline-offset-4">Home</Link>
+            <Link href="/input" className="hover:text-emerald-300 hover:underline underline-offset-4">Demo</Link>
+            <Link href="https://github.com/AetherSparks/Digital-Raindrop-Displayer" target="_blank" className="hover:text-emerald-300 hover:underline underline-offset-4">GitHub</Link>
+          </div>
+        </div>
+      </nav>
+
       <main className="flex-grow z-10 container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto bg-black/50 backdrop-blur-sm border border-emerald-800/50 rounded-lg p-6 shadow-lg">
           <h1 className="text-3xl font-mono font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">Input Data</h1>
@@ -96,13 +117,40 @@ export default function InputPage() {
               <Link href="/" className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm">
                 Back to Home
               </Link>
-              <Link href="/solution" className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all">
-                Process Data
-              </Link>
+              <button 
+                onClick={handleCreateMatrix}
+                className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono transition-all"
+              >
+                Create Matrix
+              </button>
             </div>
-          </div> 
+          </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="z-10 bg-black/80 backdrop-blur-sm border-t border-emerald-900/50 py-6">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <Link href="/" className="flex items-center">
+                <div className="w-6 h-6 rounded-full bg-emerald-900/40 flex items-center justify-center border border-emerald-700/50 mr-2">
+                  <span className="text-emerald-400 font-mono text-xs font-bold">78</span>
+                </div>
+                <span className="text-sm font-mono font-bold tracking-wider text-emerald-400">Digital Rainfall</span>
+              </Link>
+            </div>
+            <div className="text-xs text-emerald-400/60 font-mono">
+              &copy; {new Date().getFullYear()} Team 78. All rights reserved.
+            </div>
+            <div className="mt-4 md:mt-0">
+              <Link href="/solution" className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300">
+                Try The Solution
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
