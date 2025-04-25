@@ -6,7 +6,14 @@ import Link from "next/link";
 import Image from "next/image";
 import CopyableCode from "../components/CopyableCode";
 
-type ViewType = "Steps" | "PseudoCode" | "TypeScript" | "Python" | "Java" | "C++" | "Rust";
+type ViewType =
+  | "Steps"
+  | "PseudoCode"
+  | "TypeScript"
+  | "Python"
+  | "Java"
+  | "C++"
+  | "Rust";
 
 export default function CodePage() {
   const [view, setView] = useState<ViewType>("Steps");
@@ -20,13 +27,19 @@ export default function CodePage() {
         <div className="relative group">
           <div className="absolute inset-0 bg-emerald-900/20 backdrop-blur-md rounded-lg border border-emerald-600/20 transition-all duration-300 group-hover:bg-emerald-900/30 group-hover:border-emerald-600/30"></div>
           <ol className="list-decimal list-inside text-emerald-300 relative p-4">
-            <li className="mb-2">Group raindrops by their timestamps using a HashMap.</li>
+            <li className="mb-2">
+              Group raindrops by their timestamps using a HashMap.
+            </li>
             <li className="mb-2">
               Iterate through the HashMap to find the maximum number of unique
               columns.
             </li>
-            <li className="mb-2">Clear previous solutions if a new maximum is found.</li>
-            <li>Store timestamps and columns for the maximum unique columns.</li>
+            <li className="mb-2">
+              Clear previous solutions if a new maximum is found.
+            </li>
+            <li>
+              Store timestamps and columns for the maximum unique columns.
+            </li>
           </ol>
         </div>
       </div>
@@ -36,7 +49,8 @@ export default function CodePage() {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           PseudoCode
         </h2>
-        <CopyableCode code={`HashMap timestampMap
+        <CopyableCode
+          code={`HashMap timestampMap
 For each drop in parsedData.drops:
   If timestampMap does not contain drop.timestamp:
     Initialize an empty Set for drop.timestamp
@@ -49,7 +63,8 @@ For each timestamp, columns in timestampMap:
     If size(columns) > maxColumns:
       Clear solutions
       maxColumns = size(columns)
-    Add {timestamp, columns} to solutions`} />
+    Add {timestamp, columns} to solutions`}
+        />
       </div>
     ),
     TypeScript: (
@@ -57,7 +72,8 @@ For each timestamp, columns in timestampMap:
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           TypeScript
         </h2>
-        <CopyableCode code={`interface RaindropData {
+        <CopyableCode
+          code={`interface RaindropData {
   timestamp: number;
   column: number;
 }
@@ -96,7 +112,9 @@ function findMaxColumns(data: RaindropData[]): Solution[] {
   });
 
   return solutions;
-}`} language="typescript" />
+}`}
+          language="typescript"
+        />
       </div>
     ),
     Python: (
@@ -104,7 +122,8 @@ function findMaxColumns(data: RaindropData[]): Solution[] {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           Python
         </h2>
-        <CopyableCode code={`timestamp_map = {}
+        <CopyableCode
+          code={`timestamp_map = {}
 for drop in parsed_data['drops']:
     if drop['timestamp'] not in timestamp_map:
         timestamp_map[drop['timestamp']] = set()
@@ -120,7 +139,9 @@ for timestamp, columns in timestamp_map.items():
         solutions.append({
             'timestamp': timestamp,
             'columns': sorted(list(columns))
-        })`} language="python" />
+        })`}
+          language="python"
+        />
       </div>
     ),
     Java: (
@@ -128,7 +149,8 @@ for timestamp, columns in timestamp_map.items():
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           Java
         </h2>
-        <CopyableCode code={`Map<Integer, Set<Integer>> timestampMap = new HashMap<>();
+        <CopyableCode
+          code={`Map<Integer, Set<Integer>> timestampMap = new HashMap<>();
 for (Drop drop : parsedData.getDrops()) {
     timestampMap.putIfAbsent(drop.getTimestamp(), new HashSet<>());
     timestampMap.get(drop.getTimestamp()).add(drop.getColumn());
@@ -148,7 +170,9 @@ for (Map.Entry<Integer, Set<Integer>> entry : timestampMap.entrySet()) {
         Collections.sort(sortedColumns);
         solutions.add(new Solution(timestamp, sortedColumns));
     }
-}`} language="java" />
+}`}
+          language="java"
+        />
       </div>
     ),
     "C++": (
@@ -156,7 +180,8 @@ for (Map.Entry<Integer, Set<Integer>> entry : timestampMap.entrySet()) {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           C++
         </h2>
-        <CopyableCode code={`std::unordered_map<int, std::unordered_set<int>> timestampMap;
+        <CopyableCode
+          code={`std::unordered_map<int, std::unordered_set<int>> timestampMap;
 for (const auto& drop : parsedData.drops) {
     timestampMap[drop.timestamp].insert(drop.column);
 }
@@ -173,7 +198,9 @@ for (const auto& [timestamp, columns] : timestampMap) {
         std::sort(sortedColumns.begin(), sortedColumns.end());
         solutions.push_back({timestamp, sortedColumns});
     }
-}`} language="cpp" />
+}`}
+          language="cpp"
+        />
       </div>
     ),
     Rust: (
@@ -181,7 +208,8 @@ for (const auto& [timestamp, columns] : timestampMap) {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           Rust
         </h2>
-        <CopyableCode code={`use std::collections::{HashMap, HashSet};
+        <CopyableCode
+          code={`use std::collections::{HashMap, HashSet};
 
 #[derive(Debug)]
 struct Raindrop {
@@ -226,7 +254,9 @@ fn find_max_columns(drops: &[Raindrop]) -> Vec<Solution> {
     }
     
     solutions
-}`} language="rust" />
+}`}
+          language="rust"
+        />
       </div>
     ),
   };
@@ -293,7 +323,11 @@ fn find_max_columns(drops: &[Raindrop]) -> Vec<Solution> {
               className="w-full px-4 py-2 rounded-lg bg-emerald-900/60 border border-emerald-600/40 text-emerald-100 backdrop-blur-sm transition-all hover:bg-emerald-900/70 hover:border-emerald-600/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
             >
               {Object.keys(codeViews).map((key) => (
-                <option key={key} value={key} className="bg-black text-emerald-300">
+                <option
+                  key={key}
+                  value={key}
+                  className="bg-black text-emerald-300"
+                >
                   {key}
                 </option>
               ))}
@@ -322,7 +356,6 @@ fn find_max_columns(drops: &[Raindrop]) -> Vec<Solution> {
             <div className="text-xs text-emerald-400/60 font-mono">
               &copy; {new Date().getFullYear()} Team 78. All rights reserved.
             </div>
-
           </div>
         </div>
       </footer>
