@@ -178,22 +178,24 @@ for (const auto& [timestamp, columns] : timestampMap) {
       </nav>
 
       <main className="flex-grow z-10 container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-mono font-bold mb-6">Code Structure</h1>
-        <div className="mb-4">
-          <select
-            value={view}
-            onChange={(e) => setView(e.target.value as ViewType)}
-            className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 text-emerald-100"
-          >
-            {Object.keys(codeViews).map((key) => (
-              <option key={key} value={key}>
-                {key}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="bg-black/50 backdrop-blur-sm border border-emerald-800/50 rounded-lg p-6 shadow-lg max-w-4xl">
-          {codeViews[view]}
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
+          <h1 className="text-3xl font-mono font-bold mb-6 text-center">Code Structure</h1>
+          <div className="mb-4 w-full max-w-xs">
+            <select
+              value={view}
+              onChange={(e) => setView(e.target.value as ViewType)}
+              className="w-full px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 text-emerald-100"
+            >
+              {Object.keys(codeViews).map((key) => (
+                <option key={key} value={key}>
+                  {key}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full bg-black/50 backdrop-blur-sm border border-emerald-800/50 rounded-lg p-6 shadow-lg">
+            {codeViews[view]}
+          </div>
         </div>
       </main>
 
