@@ -1,0 +1,25 @@
+{
+  "name": "digital-raindrop-displayer",
+  "version": "1.0.0",
+  "description": "Given logs of digital “rain” drops (timestamp, column), find the maximum number of columns that had a drop at the same timestamp.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AetherSparks/Digital-Raindrop-Displayer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AetherSparks/Digital-Raindrop-Displayer/issues"
+  },
+  "homepage": "https://github.com/AetherSparks/Digital-Raindrop-Displayer#readme",
+  "dependencies": {
+    "next": "^15.3.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

@@ -47,3 +47,16 @@ Given logs of digital “rain” drops (timestamp, column), find the maximum num
 
 ### Solution:
 The solution involves processing the input logs to group drops by their timestamps and then determining the maximum number of unique columns that had drops at the same timestamp. The implementation efficiently handles the input data to compute the result.
+
+## Requirements
+
+To run this project, ensure you have the following installed:
+
+- Node.js (v16 or later)
+- npm (v7 or later)
+
+### Setup
+
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Start the development server with `npm run dev`.
