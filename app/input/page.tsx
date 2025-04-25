@@ -100,7 +100,7 @@ export default function InputPage() {
                 Process Data
               </Link>
             </div>
-          </div>
+          </div> 
         </div>
       </main>
     </div>
