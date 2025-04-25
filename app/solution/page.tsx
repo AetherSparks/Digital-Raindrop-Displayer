@@ -393,14 +393,6 @@ export default function SolutionPage() {
             <div className="text-xs text-emerald-400/60 font-mono">
               &copy; {new Date().getFullYear()} Team 78. All rights reserved.
             </div>
-            <div className="mt-4 md:mt-0">
-              <Link
-                href="/input"
-                className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300"
-              >
-                Try Another Input
-              </Link>
-            </div>
           </div>
         </div>
       </footer>
