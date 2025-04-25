@@ -133,8 +133,8 @@ export default function SolutionPage() {
             </h2>
             <div className="grid grid-cols-1 gap-6">
               {/* Matrix Grid */}
-              <div className="aspect-[2/1] relative border border-emerald-800/30 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 grid" style={{ 
+              <div className="aspect-[2/1] relative border border-emerald-800/30 rounded-lg overflow-hidden bg-black/30">
+                <div className="absolute inset-0 grid gap-px" style={{ 
                   gridTemplateColumns: `repeat(${data.columns}, 1fr)` 
                 }}>
                   {Array.from({ length: data.columns }).map((_, i) => {
@@ -142,12 +142,26 @@ export default function SolutionPage() {
                     return (
                       <div 
                         key={i}
-                        className={`border-r border-emerald-800/30 flex items-center justify-center ${
-                          hasRaindrop ? 'bg-emerald-500/20' : ''
-                        }`}
+                        className={`relative flex items-center justify-center ${
+                          hasRaindrop ? 'bg-emerald-500/10' : 'bg-black/20'
+                        } transition-all duration-300`}
                       >
+                        {/* Column Number */}
+                        <span className="absolute top-2 opacity-50 text-xs">
+                          {i + 1}
+                        </span>
+                        
+                        {/* Raindrop */}
                         {hasRaindrop && (
-                          <div className="w-4 h-4 rounded-full bg-emerald-500/50 animate-pulse" />
+                          <div className="relative">
+                            {/* Glow effect */}
+                            <div className="absolute inset-0 blur-md bg-emerald-500/30 rounded-full" />
+                            {/* Raindrop circle */}
+                            <div className="w-4 h-4 rounded-full bg-gradient-to-b from-emerald-400 to-emerald-600 shadow-lg shadow-emerald-500/50 relative">
+                              {/* Shine effect */}
+                              <div className="absolute top-0.5 left-0.5 w-2 h-2 rounded-full bg-emerald-300/50" />
+                            </div>
+                          </div>
                         )}
                       </div>
                     );
@@ -161,22 +175,34 @@ export default function SolutionPage() {
                   <span>Timestamp: {currentTimestamp}</span>
                   <span>Max: {maxTimestamp}</span>
                 </div>
-                <input
-                  type="range"
-                  min={1}
-                  max={maxTimestamp}
-                  value={currentTimestamp}
-                  onChange={(e) => setCurrentTimestamp(Number(e.target.value))}
-                  className="w-full"
-                />
+                <div className="relative pt-1">
+                  <input
+                    type="range"
+                    min={1}
+                    max={maxTimestamp}
+                    value={currentTimestamp}
+                    onChange={(e) => setCurrentTimestamp(Number(e.target.value))}
+                    className="w-full h-2 bg-emerald-900/30 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                    style={{
+                      background: `linear-gradient(to right, rgb(16 185 129 / 0.5) 0%, rgb(16 185 129 / 0.5) ${(currentTimestamp / maxTimestamp) * 100}%, rgb(16 185 129 / 0.2) ${(currentTimestamp / maxTimestamp) * 100}%, rgb(16 185 129 / 0.2) 100%)`
+                    }}
+                  />
+                </div>
               </div>
 
               {/* Current State Info */}
-              <div className="text-sm space-y-2">
+              <div className="text-sm mt-4 p-4 rounded-lg bg-emerald-900/10 border border-emerald-800/30">
                 <p>
-                  <span className="text-emerald-300">Current Drops: </span>
+                  <span className="text-emerald-300 font-semibold">Current State: </span>
                   {getCurrentDrops().length > 0 
-                    ? `Columns ${getCurrentDrops().sort((a, b) => a - b).join(', ')} have raindrops`
+                    ? (
+                      <>
+                        Raindrops in columns{' '}
+                        <span className="text-emerald-400 font-mono">
+                          {getCurrentDrops().sort((a, b) => a - b).join(', ')}
+                        </span>
+                      </>
+                    )
                     : 'No raindrops at this timestamp'}
                 </p>
               </div>
