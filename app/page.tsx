@@ -51,9 +51,13 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           {/* Hero Section */}
           <div className="mb-16 text-center">
-            <h1 className="text-4xl md:text-6xl font-mono font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
-              Digital Rainfall
-            </h1>
+            <div className="mb-6">
+              <h1 className="text-4xl md:text-6xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300 inline-block my-4">
+                <span className="block leading-normal py-1">
+                  Digital Rainfall
+                </span>
+              </h1>
+            </div>
             <p className="text-lg md:text-xl text-emerald-300/90 mb-8 font-mono">
               Visualizing and solving the matrix rain problem
             </p>
