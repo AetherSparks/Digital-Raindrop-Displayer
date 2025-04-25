@@ -15,7 +15,11 @@ export default function Home() {
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50 p-1.5">
-                <img src="/favicon.ico" alt="Logo" className="w-full h-full object-contain" />
+                <img
+                  src="/favicon.ico"
+                  alt="Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
                 Digital Rainfall
@@ -126,7 +130,7 @@ export default function Home() {
                   Abhiraj Ghose
                 </h3>
                 <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
-                  e23cseu0014
+                  E23CSEU0014
                 </p>
                 <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
                   Team Leader
@@ -137,7 +141,7 @@ export default function Home() {
                   Pallav Sharma
                 </h3>
                 <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
-                  e23cseu0022
+                  E23CSEU0022
                 </p>
                 <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
                   Team Member
@@ -148,7 +152,7 @@ export default function Home() {
                   Shivam Jain
                 </h3>
                 <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
-                  e23cseu0017
+                  E23CSEU0017
                 </p>
                 <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
                   Team Member
