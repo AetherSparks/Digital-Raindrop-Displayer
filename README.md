@@ -1,11 +1,7 @@
 # 🌧️ Digital Rainfall Visualizer
 
 ![Digital Rainfall](./app/favicon.ico)
-<img
-  src="/favicon.ico"
-  alt="Digital Rainfall Logo"
-  className="w-20 h-20"
-/>
+
 An interactive web application that visualizes and solves the digital rainfall problem, developed for AlgoNet Hackathon by Team 78.
 
 ## 🚀 Features
