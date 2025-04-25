@@ -13,15 +13,33 @@ export default function InputPage() {
 
   const generateRandomData = () => {
     const data = [];
-    // Remove N M line since we have dropdowns
-    // Generate random drops
-    for (let i = 0; i < drops; i++) {
+    const usedPairs = new Set<string>();
+    let attempts = 0;
+    const maxAttempts = 100; // Prevent infinite loop if unique combinations are impossible
+
+    // Generate random drops with unique timestamp-column pairs
+    while (data.length < drops && attempts < maxAttempts) {
       const timestamp = Math.floor(Math.random() * 5) + 1; // Random timestamp between 1-5
       const column = Math.floor(Math.random() * columns) + 1; // Random column between 1-N
-      data.push(`${timestamp} ${column}`);
+      const pair = `${timestamp},${column}`;
+
+      if (!usedPairs.has(pair)) {
+        usedPairs.add(pair);
+        data.push(`${timestamp} ${column}`);
+      }
+      attempts++;
     }
 
-    setInputData(data.join("\n"));
+    // If we couldn't generate enough unique pairs, fill the remaining with duplicates
+    if (data.length < drops) {
+      while (data.length < drops) {
+        const timestamp = Math.floor(Math.random() * 5) + 1;
+        const column = Math.floor(Math.random() * columns) + 1;
+        data.push(`${timestamp} ${column}`);
+      }
+    }
+    
+    setInputData(data.join('\n'));
   };
 
   const handleCreateMatrix = () => {
