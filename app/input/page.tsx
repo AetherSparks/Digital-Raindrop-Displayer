@@ -11,16 +11,19 @@ export default function InputPage() {
   const [drops, setDrops] = useState<number>(5);
   const [inputData, setInputData] = useState<string>("");
 
+  const validatePositiveInteger = (value: number): boolean => {
+    return Number.isInteger(value) && value > 0;
+  };
+
   const generateRandomData = () => {
     const data = [];
     const usedPairs = new Set<string>();
     let attempts = 0;
-    const maxAttempts = 100; // Prevent infinite loop if unique combinations are impossible
+    const maxAttempts = 100;
 
-    // Generate random drops with unique timestamp-column pairs
     while (data.length < drops && attempts < maxAttempts) {
-      const timestamp = Math.floor(Math.random() * 5) + 1; // Random timestamp between 1-5
-      const column = Math.floor(Math.random() * columns) + 1; // Random column between 1-N
+      const timestamp = Math.floor(Math.random() * 5) + 1;
+      const column = Math.floor(Math.random() * columns) + 1;
       const pair = `${timestamp},${column}`;
 
       if (!usedPairs.has(pair)) {
@@ -30,7 +33,6 @@ export default function InputPage() {
       attempts++;
     }
 
-    // If we couldn't generate enough unique pairs, fill the remaining with duplicates
     if (data.length < drops) {
       while (data.length < drops) {
         const timestamp = Math.floor(Math.random() * 5) + 1;
@@ -50,28 +52,36 @@ export default function InputPage() {
       // Parse each line for timestamp and column
       for (let i = 0; i < lines.length; i++) {
         const [timestamp, column] = lines[i].split(" ").map(Number);
+        
+        // Check for invalid format
         if (isNaN(timestamp) || isNaN(column)) {
           throw new Error("Invalid data format");
         }
+
+        // Check for decimal numbers
+        if (!Number.isInteger(timestamp) || !Number.isInteger(column)) {
+          throw new Error("Timestamps and columns must be whole numbers");
+        }
+
+        // Check for negative numbers
+        if (timestamp <= 0 || column <= 0) {
+          throw new Error("Timestamps and columns must be positive numbers");
+        }
+
+        // Check column range
         if (column > columns) {
-          throw new Error(
-            `Column number ${column} exceeds the maximum columns (${columns})`
-          );
+          throw new Error(`Column number ${column} exceeds the maximum columns (${columns})`);
         }
-        if (timestamp < 1) {
-          throw new Error("Timestamp must be greater than 0");
-        }
+
         dropsData.push({ timestamp, column });
       }
 
       // Validate number of drops matches the input
       if (dropsData.length !== drops) {
-        throw new Error(
-          `Expected ${drops} drops but found ${dropsData.length} entries`
-        );
+        throw new Error(`Expected ${drops} drops but found ${dropsData.length} entries`);
       }
 
-      // Store the processed data using the values from dropdowns
+      // Store the processed data
       localStorage.setItem(
         "raindropData",
         JSON.stringify({
@@ -82,11 +92,7 @@ export default function InputPage() {
 
       router.push("/solution");
     } catch (error) {
-      alert(
-        error instanceof Error
-          ? error.message
-          : "Invalid input format. Please check your data."
-      );
+      alert(error instanceof Error ? error.message : "Invalid input format. Please check your data.");
     }
   };
 
@@ -144,31 +150,45 @@ export default function InputPage() {
             {/* Number Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="font-mono">
-                <label className="block text-emerald-300 mb-2">
-                  Number of Columns
-                </label>
+                <label className="block text-emerald-300 mb-2">Number of Columns</label>
                 <input
                   type="number"
                   min="1"
+                  step="1"
                   value={columns}
                   onChange={(e) => {
-                    const value = e.target.value ? parseInt(e.target.value) : 1;
-                    setColumns(Math.max(1, value));
+                    const value = e.target.value ? parseFloat(e.target.value) : 1;
+                    if (validatePositiveInteger(value)) {
+                      setColumns(value);
+                    }
+                  }}
+                  onBlur={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (!validatePositiveInteger(value)) {
+                      setColumns(1);
+                    }
                   }}
                   className="w-full bg-black/40 border border-emerald-800/30 rounded-lg p-2 text-emerald-300 font-mono focus:border-emerald-600/50 focus:outline-none"
                 />
               </div>
               <div className="font-mono">
-                <label className="block text-emerald-300 mb-2">
-                  Number of Raindrops
-                </label>
+                <label className="block text-emerald-300 mb-2">Number of Raindrops</label>
                 <input
                   type="number"
                   min="1"
+                  step="1"
                   value={drops}
                   onChange={(e) => {
-                    const value = e.target.value ? parseInt(e.target.value) : 1;
-                    setDrops(Math.max(1, value));
+                    const value = e.target.value ? parseFloat(e.target.value) : 1;
+                    if (validatePositiveInteger(value)) {
+                      setDrops(value);
+                    }
+                  }}
+                  onBlur={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (!validatePositiveInteger(value)) {
+                      setDrops(1);
+                    }
                   }}
                   className="w-full bg-black/40 border border-emerald-800/30 rounded-lg p-2 text-emerald-300 font-mono focus:border-emerald-600/50 focus:outline-none"
                 />
