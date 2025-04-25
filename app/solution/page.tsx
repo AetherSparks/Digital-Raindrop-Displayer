@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import MatrixRain from '../components/MatrixRain';
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import MatrixRain from "../components/MatrixRain";
 
 interface RaindropData {
   timestamp: number;
@@ -30,30 +30,30 @@ export default function SolutionPage() {
 
   useEffect(() => {
     // Load data from localStorage
-    const savedData = localStorage.getItem('raindropData');
+    const savedData = localStorage.getItem("raindropData");
     if (savedData) {
       const parsedData: ProcessedData = JSON.parse(savedData);
       setData(parsedData);
-      
+
       // Find max timestamp
-      const max = Math.max(...parsedData.drops.map(d => d.timestamp));
+      const max = Math.max(...parsedData.drops.map((d) => d.timestamp));
       setMaxTimestamp(max);
-      
+
       // Calculate solution
       const timestampMap = new Map<number, Set<number>>();
-      
+
       // Group drops by timestamp
-      parsedData.drops.forEach(drop => {
+      parsedData.drops.forEach((drop) => {
         if (!timestampMap.has(drop.timestamp)) {
           timestampMap.set(drop.timestamp, new Set());
         }
         timestampMap.get(drop.timestamp)?.add(drop.column);
       });
-      
+
       // Find all timestamps with maximum unique columns
       let maxColumns = 0;
       const solutions: Array<{ timestamp: number; columns: number[] }> = [];
-      
+
       timestampMap.forEach((columns, timestamp) => {
         if (columns.size >= maxColumns) {
           if (columns.size > maxColumns) {
@@ -64,14 +64,14 @@ export default function SolutionPage() {
           // Add this solution
           solutions.push({
             timestamp,
-            columns: Array.from(columns)
+            columns: Array.from(columns),
           });
         }
       });
-      
+
       setSolution({
         maxColumns,
-        solutions: solutions.sort((a, b) => a.timestamp - b.timestamp)
+        solutions: solutions.sort((a, b) => a.timestamp - b.timestamp),
       });
     }
   }, []);
@@ -80,16 +80,23 @@ export default function SolutionPage() {
   const getCurrentDrops = () => {
     if (!data) return [];
     return data.drops
-      .filter(drop => drop.timestamp === currentTimestamp)
-      .map(drop => drop.column);
+      .filter((drop) => drop.timestamp === currentTimestamp)
+      .map((drop) => drop.column);
   };
 
   if (!data) {
     return (
       <div className="min-h-screen bg-black text-emerald-400 flex flex-col items-center justify-center p-4">
-        <h1 className="text-3xl font-mono font-bold mb-6">Digital Rainfall Solution</h1>
-        <p className="text-emerald-300 mb-8">No data available. Please generate input data first.</p>
-        <Link href="/input" className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono">
+        <h1 className="text-3xl font-mono font-bold mb-6">
+          Digital Rainfall Solution
+        </h1>
+        <p className="text-emerald-300 mb-8">
+          No data available. Please generate input data first.
+        </p>
+        <Link
+          href="/input"
+          className="px-6 py-2 rounded-md bg-emerald-800/60 hover:bg-emerald-700/80 border border-emerald-500/50 text-emerald-100 font-mono"
+        >
           Generate Input
         </Link>
       </div>
@@ -117,9 +124,25 @@ export default function SolutionPage() {
             </Link>
           </div>
           <div className="flex items-center space-x-6 text-sm font-mono">
-            <Link href="/" className="hover:text-emerald-300 hover:underline underline-offset-4">Home</Link>
-            <Link href="/input" className="hover:text-emerald-300 hover:underline underline-offset-4">Demo</Link>
-            <Link href="https://github.com/AetherSparks/Digital-Raindrop-Displayer" target="_blank" className="hover:text-emerald-300 hover:underline underline-offset-4">GitHub</Link>
+            <Link
+              href="/"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              Home
+            </Link>
+            <Link
+              href="/input"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              Demo
+            </Link>
+            <Link
+              href="https://github.com/AetherSparks/Digital-Raindrop-Displayer"
+              target="_blank"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              GitHub
+            </Link>
           </div>
         </div>
       </nav>
@@ -134,23 +157,28 @@ export default function SolutionPage() {
             <div className="grid grid-cols-1 gap-6">
               {/* Matrix Grid */}
               <div className="aspect-[2/1] relative border border-emerald-800/30 rounded-lg overflow-hidden bg-black/30">
-                <div className="absolute inset-0 grid gap-px" style={{ 
-                  gridTemplateColumns: `repeat(${data.columns}, 1fr)` 
-                }}>
+                <div
+                  className="absolute inset-0 grid gap-px"
+                  style={{
+                    gridTemplateColumns: `repeat(${data.columns}, 1fr)`,
+                  }}
+                >
                   {Array.from({ length: data.columns }).map((_, i) => {
                     const hasRaindrop = getCurrentDrops().includes(i + 1);
                     return (
-                      <div 
+                      <div
                         key={i}
                         className={`relative flex items-center justify-center ${
-                          hasRaindrop ? 'bg-emerald-500/30 backdrop-blur-sm shadow-[inset_0_0_40px_rgba(16,185,129,0.3)]' : 'bg-black/20'
+                          hasRaindrop
+                            ? "bg-emerald-500/30 backdrop-blur-sm shadow-[inset_0_0_40px_rgba(16,185,129,0.3)]"
+                            : "bg-black/20"
                         } transition-all duration-300`}
                       >
                         {/* Column Number */}
                         <span className="absolute top-2 opacity-70 text-base font-mono">
                           {i + 1}
                         </span>
-                        
+
                         {/* Raindrop */}
                         {hasRaindrop && (
                           <div className="relative">
@@ -192,7 +220,9 @@ export default function SolutionPage() {
                     min={1}
                     max={maxTimestamp}
                     value={currentTimestamp}
-                    onChange={(e) => setCurrentTimestamp(Number(e.target.value))}
+                    onChange={(e) =>
+                      setCurrentTimestamp(Number(e.target.value))
+                    }
                     className="w-full h-2 bg-emerald-900/30 rounded-lg appearance-none cursor-pointer 
                       focus:outline-none focus:ring-2 focus:ring-emerald-500/50
                       [&::-webkit-slider-thumb]:appearance-none
@@ -220,7 +250,11 @@ export default function SolutionPage() {
                       [&::-moz-range-thumb]:transition-all
                       [&::-moz-range-thumb]:hover:bg-emerald-300"
                     style={{
-                      background: `linear-gradient(to right, rgb(16 185 129 / 0.5) 0%, rgb(16 185 129 / 0.5) ${((currentTimestamp - 1) / (maxTimestamp - 1)) * 100}%, rgb(16 185 129 / 0.2) ${((currentTimestamp - 1) / (maxTimestamp - 1)) * 100}%, rgb(16 185 129 / 0.2) 100%)`
+                      background: `linear-gradient(to right, rgb(16 185 129 / 0.5) 0%, rgb(16 185 129 / 0.5) ${
+                        ((currentTimestamp - 1) / (maxTimestamp - 1)) * 100
+                      }%, rgb(16 185 129 / 0.2) ${
+                        ((currentTimestamp - 1) / (maxTimestamp - 1)) * 100
+                      }%, rgb(16 185 129 / 0.2) 100%)`,
                     }}
                   />
                   {/* Timestamp Markers */}
@@ -231,23 +265,31 @@ export default function SolutionPage() {
                         className="absolute transform -translate-x-1/2"
                         style={{
                           left: `${(i / (maxTimestamp - 1)) * 100}%`,
-                          top: 0
+                          top: 0,
                         }}
                       >
                         <div className="w-px h-2 bg-emerald-500/30"></div>
-                        <div className="text-xs text-emerald-400/70 mt-1">{i + 1}</div>
+                        <div className="text-xs text-emerald-400/70 mt-1">
+                          {i + 1}
+                        </div>
                       </div>
                     ))}
                   </div>
                   <div className="flex justify-between mt-4">
-                    <button 
-                      onClick={() => setCurrentTimestamp(prev => Math.max(1, prev - 1))}
+                    <button
+                      onClick={() =>
+                        setCurrentTimestamp((prev) => Math.max(1, prev - 1))
+                      }
                       className="px-2 py-1 text-sm rounded bg-emerald-900/60 hover:bg-emerald-800/70 transition-all"
                     >
                       &lt; Prev
                     </button>
-                    <button 
-                      onClick={() => setCurrentTimestamp(prev => Math.min(maxTimestamp, prev + 1))}
+                    <button
+                      onClick={() =>
+                        setCurrentTimestamp((prev) =>
+                          Math.min(maxTimestamp, prev + 1)
+                        )
+                      }
                       className="px-2 py-1 text-sm rounded bg-emerald-900/60 hover:bg-emerald-800/70 transition-all"
                     >
                       Next &gt;
@@ -259,17 +301,21 @@ export default function SolutionPage() {
               {/* Current State Info */}
               <div className="text-sm mt-4 p-4 rounded-lg bg-emerald-900/10 border border-emerald-800/30">
                 <p>
-                  <span className="text-emerald-300 font-semibold">Current State: </span>
-                  {getCurrentDrops().length > 0 
-                    ? (
-                      <>
-                        Raindrops in columns{' '}
-                        <span className="text-emerald-400 font-mono">
-                          {getCurrentDrops().sort((a, b) => a - b).join(', ')}
-                        </span>
-                      </>
-                    )
-                    : 'No raindrops at this timestamp'}
+                  <span className="text-emerald-300 font-semibold">
+                    Current State:{" "}
+                  </span>
+                  {getCurrentDrops().length > 0 ? (
+                    <>
+                      Raindrops in columns{" "}
+                      <span className="text-emerald-400 font-mono">
+                        {getCurrentDrops()
+                          .sort((a, b) => a - b)
+                          .join(", ")}
+                      </span>
+                    </>
+                  ) : (
+                    "No raindrops at this timestamp"
+                  )}
                 </p>
               </div>
             </div>
@@ -283,15 +329,21 @@ export default function SolutionPage() {
               </h2>
               <div className="space-y-4 text-emerald-100/80">
                 <p>
-                  Maximum number of simultaneous raindrops: {' '}
-                  <span className="text-emerald-300 font-bold">{solution.maxColumns}</span>
+                  Maximum number of simultaneous raindrops:{" "}
+                  <span className="text-emerald-300 font-bold">
+                    {solution.maxColumns}
+                  </span>
                 </p>
                 <p className="font-bold text-emerald-300">Solutions:</p>
                 <div className="space-y-2">
                   {solution.solutions.map((sol, index) => (
-                    <div key={index} className="pl-4 border-l-2 border-emerald-800/30">
+                    <div
+                      key={index}
+                      className="pl-4 border-l-2 border-emerald-800/30"
+                    >
                       <p>
-                        Timestamp {sol.timestamp}: Columns {sol.columns.sort((a, b) => a - b).join(', ')}
+                        Timestamp {sol.timestamp}: Columns{" "}
+                        {sol.columns.sort((a, b) => a - b).join(", ")}
                       </p>
                     </div>
                   ))}
@@ -302,8 +354,8 @@ export default function SolutionPage() {
 
           {/* Action Buttons */}
           <div className="flex justify-between">
-            <Link 
-              href="/input" 
+            <Link
+              href="/input"
               className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm"
             >
               Try Another Input
@@ -330,7 +382,10 @@ export default function SolutionPage() {
               &copy; {new Date().getFullYear()} Team 78. All rights reserved.
             </div>
             <div className="mt-4 md:mt-0">
-              <Link href="/input" className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300">
+              <Link
+                href="/input"
+                className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300"
+              >
                 Try Another Input
               </Link>
             </div>

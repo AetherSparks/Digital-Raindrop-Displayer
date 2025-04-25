@@ -52,7 +52,7 @@ export default function InputPage() {
       // Parse each line for timestamp and column
       for (let i = 0; i < lines.length; i++) {
         const [timestamp, column] = lines[i].split(" ").map(Number);
-        
+
         // Check for invalid format
         if (isNaN(timestamp) || isNaN(column)) {
           throw new Error("Invalid data format");
@@ -70,7 +70,9 @@ export default function InputPage() {
 
         // Check column range
         if (column > columns) {
-          throw new Error(`Column number ${column} exceeds the maximum columns (${columns})`);
+          throw new Error(
+            `Column number ${column} exceeds the maximum columns (${columns})`
+          );
         }
 
         dropsData.push({ timestamp, column });
@@ -78,7 +80,9 @@ export default function InputPage() {
 
       // Validate number of drops matches the input
       if (dropsData.length !== drops) {
-        throw new Error(`Expected ${drops} drops but found ${dropsData.length} entries`);
+        throw new Error(
+          `Expected ${drops} drops but found ${dropsData.length} entries`
+        );
       }
 
       // Store the processed data
@@ -92,7 +96,11 @@ export default function InputPage() {
 
       router.push("/solution");
     } catch (error) {
-      alert(error instanceof Error ? error.message : "Invalid input format. Please check your data.");
+      alert(
+        error instanceof Error
+          ? error.message
+          : "Invalid input format. Please check your data."
+      );
     }
   };
 
@@ -150,14 +158,18 @@ export default function InputPage() {
             {/* Number Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="font-mono">
-                <label className="block text-emerald-300 mb-2">Number of Columns</label>
+                <label className="block text-emerald-300 mb-2">
+                  Number of Columns
+                </label>
                 <input
                   type="number"
                   min="1"
                   step="1"
                   value={columns}
                   onChange={(e) => {
-                    const value = e.target.value ? parseFloat(e.target.value) : 1;
+                    const value = e.target.value
+                      ? parseFloat(e.target.value)
+                      : 1;
                     if (validatePositiveInteger(value)) {
                       setColumns(value);
                     }
@@ -172,14 +184,18 @@ export default function InputPage() {
                 />
               </div>
               <div className="font-mono">
-                <label className="block text-emerald-300 mb-2">Number of Raindrops</label>
+                <label className="block text-emerald-300 mb-2">
+                  Number of Raindrops
+                </label>
                 <input
                   type="number"
                   min="1"
                   step="1"
                   value={drops}
                   onChange={(e) => {
-                    const value = e.target.value ? parseFloat(e.target.value) : 1;
+                    const value = e.target.value
+                      ? parseFloat(e.target.value)
+                      : 1;
                     if (validatePositiveInteger(value)) {
                       setDrops(value);
                     }
