@@ -15,7 +15,7 @@ export default function Home() {
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
-                <span className="text-emerald-400 font-mono font-bold">78</span>
+                <img src="/favicon.ico" alt="Logo" className="w-6 h-6" />
               </div>
               <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
                 Digital Rainfall
@@ -51,9 +51,13 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           {/* Hero Section */}
           <div className="mb-16 text-center">
-            <h1 className="text-4xl md:text-6xl font-mono font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
-              Digital Rainfall
-            </h1>
+            <div className="mb-6">
+              <h1 className="text-4xl md:text-6xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300 inline-block my-4">
+                <span className="block leading-normal py-1">
+                  Digital Rainfall
+                </span>
+              </h1>
+            </div>
             <p className="text-lg md:text-xl text-emerald-300/90 mb-8 font-mono">
               Visualizing and solving the matrix rain problem
             </p>
@@ -111,26 +115,26 @@ export default function Home() {
               Team 78
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all">
-                <h3 className="text-lg font-bold text-emerald-300">
+              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
+                <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Abhiraj Ghose
                 </h3>
-                <p className="text-emerald-200/70 font-mono">e23cseu0014</p>
-                <p className="text-emerald-400/80 text-sm">Team Leader</p>
+                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">e23cseu0014</p>
+                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">Team Leader</p>
               </div>
-              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all">
-                <h3 className="text-lg font-bold text-emerald-300">
+              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
+                <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Pallav Sharma
                 </h3>
-                <p className="text-emerald-200/70 font-mono">e23cseu0022</p>
-                <p className="text-emerald-400/80 text-sm">Team Member</p>
+                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">e23cseu0022</p>
+                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">Team Member</p>
               </div>
-              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all">
-                <h3 className="text-lg font-bold text-emerald-300">
+              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
+                <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Shivam Jain
                 </h3>
-                <p className="text-emerald-200/70 font-mono">e23cseu0017</p>
-                <p className="text-emerald-400/80 text-sm">Team Member</p>
+                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">e23cseu0017</p>
+                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">Team Member</p>
               </div>
             </div>
           </section>
@@ -224,7 +228,12 @@ export default function Home() {
                   </p>
                 </div>
               </a>
-              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex items-center opacity-70">
+              <a
+                href="https://docs.google.com/presentation/d/1ioCnC4oHyE2AMuDXW4gZr2b-sVchCq9ZRyZy2f7NhAA/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex items-center"
+              >
                 <div className="w-10 h-10 bg-emerald-900/40 rounded-full flex items-center justify-center mr-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -243,9 +252,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold text-emerald-300">Presentation</h3>
-                  <p className="text-sm text-emerald-200/70">Coming soon...</p>
+                  <p className="text-sm text-emerald-200/70">View our project presentation</p>
                 </div>
-              </div>
+              </a>
             </div>
           </section>
         </div>
