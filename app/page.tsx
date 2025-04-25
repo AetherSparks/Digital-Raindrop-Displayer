@@ -166,15 +166,15 @@ export default function Home() {
                 number of raindrops, and efficiently handles the key challenge
                 of tracking which columns are hit simultaneously.
               </p>
-              <div className="mt-6">
+              <div className="mt-6 flex justify-center">
                 <Link
                   href="/input"
-                  className="inline-flex items-center px-4 py-2 rounded bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm"
+                  className="inline-flex items-center px-6 py-3 rounded-lg bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm group hover:shadow-lg hover:shadow-emerald-900/30"
                 >
-                  <span>Try the interactive demo</span>
+                  <span className="group-hover:text-emerald-300 transition-colors">Try the interactive demo</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 ml-2"
+                    className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
