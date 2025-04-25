@@ -13,10 +13,14 @@ export default function Home() {
       <nav className="sticky top-0 z-20 bg-black/70 backdrop-blur-sm border-b border-emerald-500/30 shadow-lg shadow-emerald-500/10">
         <div className="container mx-auto px-4 py-4 flex flex-wrap justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
-              <span className="text-emerald-400 font-mono font-bold">78</span>
-            </div>
-            <span className="text-xl font-mono font-bold tracking-widest text-emerald-400">Digital Rainfall</span>
+          <Link href="/" className="flex items-center space-x-2">
+          <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/50">
+            <span className="text-emerald-400 font-mono font-bold">78</span>
+          </div>
+          <span className="text-xl font-mono font-bold tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors">
+            Digital Rainfall
+          </span>
+          </Link>
           </div>
           <div className="flex items-center space-x-6 text-sm font-mono">
             <Link href="/" className="hover:text-emerald-300 hover:underline underline-offset-4">Home</Link>
