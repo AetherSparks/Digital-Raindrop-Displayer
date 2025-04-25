@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Digital Rainfall](./app/favicon.ico)
 
-## Getting Started
+# 🌧️ Digital Rainfall Visualizer
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+
+An interactive web application that visualizes and solves the digital rainfall problem, developed for AlgoNet Hackathon by Team 78.
+
+## 🚀 Features
+
+- **Interactive Visualization**: Real-time visualization of raindrops falling on columns
+- **Matrix Rain Background**: Aesthetic cyberpunk-style matrix rain animation
+- **Multiple Language Implementations**: Solutions in TypeScript, Python, Java, C++, and Rust
+- **Dynamic Input Generation**: Random data generator or custom input options
+- **Step-by-Step Simulation**: Timeline slider to visualize raindrop states
+- **Modern UI Design**: Glassmorphic design with emerald theme and fluid animations
+- **Copy-Enabled Code Blocks**: Easy code sharing with copy functionality
+
+## 🎯 Problem Statement
+
+Given N columns and M raindrops, each falling at a specific timestamp and hitting a specific column, find the maximum number of unique columns receiving raindrops simultaneously at any timestamp.
+
+### Input Format
+- M pairs of integers (timestamp, column)
+- Multiple drops can occur at the same timestamp
+- Multiple drops can hit the same column at different times
+
+## 💡 Solution Approach
+
+Our solution efficiently processes the rainfall data through:
+
+1. Creating a dictionary/map where keys represent timestamps and values are sets of columns
+2. Processing each raindrop by adding its column to the appropriate timestamp
+3. Finding timestamps with maximum unique columns
+4. Time Complexity: O(M) where M is the number of raindrops
+
+## 🛠️ Technologies Used
+
+- **Frontend**: Next.js 14, React, TypeScript
+- **Styling**: TailwindCSS, CSS Animations
+- **3D Effects**: Three.js for raindrop effects
+- **State Management**: React Hooks
+- **Build Tool**: PNPM
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+\`\`\`bash
+git clone https://github.com/AetherSparks/Digital-Raindrop-Displayer.git
+\`\`\`
+
+2. Install dependencies:
+\`\`\`bash
+pnpm install
+\`\`\`
+
+3. Start the development server:
+\`\`\`bash
 pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 👥 Team Members
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Abhiraj Ghose** (e23cseu0014) - Team Leader
+- **Pallav Sharma** (e23cseu0022) - Team Member
+- **Shivam Jain** (e23cseu0017) - Team Member
 
-## Learn More
+## 🔗 Links
 
-To learn more about Next.js, take a look at the following resources:
+- [GitHub Repository](https://github.com/AetherSparks/Digital-Raindrop-Displayer)
+- [Project Presentation](https://docs.google.com/presentation/d/1ioCnC4oHyE2AMuDXW4gZr2b-sVchCq9ZRyZy2f7NhAA/edit?usp=sharing)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copyright © 2025 Team 78. All rights reserved.
 
-## Deploy on Vercel
+## 💡 Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Feel free to open issues and submit pull requests.

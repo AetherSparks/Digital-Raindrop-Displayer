@@ -3,8 +3,9 @@
 import { useState } from "react";
 import MatrixRain from "../components/MatrixRain";
 import Link from "next/link";
+import CopyableCode from "../components/CopyableCode";
 
-type ViewType = "Steps" | "PseudoCode" | "Python" | "Java" | "C++";
+type ViewType = "Steps" | "PseudoCode" | "TypeScript" | "Python" | "Java" | "C++" | "Rust";
 
 export default function CodePage() {
   const [view, setView] = useState<ViewType>("Steps");
@@ -15,15 +16,18 @@ export default function CodePage() {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           Steps
         </h2>
-        <ol className="list-decimal list-inside text-emerald-300">
-          <li>Group raindrops by their timestamps using a HashMap.</li>
-          <li>
-            Iterate through the HashMap to find the maximum number of unique
-            columns.
-          </li>
-          <li>Clear previous solutions if a new maximum is found.</li>
-          <li>Store timestamps and columns for the maximum unique columns.</li>
-        </ol>
+        <div className="relative group">
+          <div className="absolute inset-0 bg-emerald-900/20 backdrop-blur-md rounded-lg border border-emerald-600/20 transition-all duration-300 group-hover:bg-emerald-900/30 group-hover:border-emerald-600/30"></div>
+          <ol className="list-decimal list-inside text-emerald-300 relative p-4">
+            <li className="mb-2">Group raindrops by their timestamps using a HashMap.</li>
+            <li className="mb-2">
+              Iterate through the HashMap to find the maximum number of unique
+              columns.
+            </li>
+            <li className="mb-2">Clear previous solutions if a new maximum is found.</li>
+            <li>Store timestamps and columns for the maximum unique columns.</li>
+          </ol>
+        </div>
       </div>
     ),
     PseudoCode: (
@@ -31,8 +35,7 @@ export default function CodePage() {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           PseudoCode
         </h2>
-        <pre className="bg-emerald-900/20 p-4 rounded-lg text-sm overflow-auto">
-          {`HashMap timestampMap
+        <CopyableCode code={`HashMap timestampMap
 For each drop in parsedData.drops:
   If timestampMap does not contain drop.timestamp:
     Initialize an empty Set for drop.timestamp
@@ -45,8 +48,54 @@ For each timestamp, columns in timestampMap:
     If size(columns) > maxColumns:
       Clear solutions
       maxColumns = size(columns)
-    Add {timestamp, columns} to solutions`}
-        </pre>
+    Add {timestamp, columns} to solutions`} />
+      </div>
+    ),
+    TypeScript: (
+      <div>
+        <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
+          TypeScript
+        </h2>
+        <CopyableCode code={`interface RaindropData {
+  timestamp: number;
+  column: number;
+}
+
+interface Solution {
+  timestamp: number;
+  columns: number[];
+}
+
+function findMaxColumns(data: RaindropData[]): Solution[] {
+  const timestampMap = new Map<number, Set<number>>();
+  
+  // Group drops by timestamp
+  data.forEach(drop => {
+    if (!timestampMap.has(drop.timestamp)) {
+      timestampMap.set(drop.timestamp, new Set());
+    }
+    timestampMap.get(drop.timestamp)?.add(drop.column);
+  });
+
+  let maxColumns = 0;
+  const solutions: Solution[] = [];
+
+  // Find timestamps with maximum unique columns
+  timestampMap.forEach((columns, timestamp) => {
+    if (columns.size >= maxColumns) {
+      if (columns.size > maxColumns) {
+        solutions.length = 0;
+        maxColumns = columns.size;
+      }
+      solutions.push({
+        timestamp,
+        columns: Array.from(columns).sort((a, b) => a - b)
+      });
+    }
+  });
+
+  return solutions;
+}`} language="typescript" />
       </div>
     ),
     Python: (
@@ -54,8 +103,7 @@ For each timestamp, columns in timestampMap:
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           Python
         </h2>
-        <pre className="bg-emerald-900/20 p-4 rounded-lg text-sm overflow-auto">
-          {`timestamp_map = {}
+        <CopyableCode code={`timestamp_map = {}
 for drop in parsed_data['drops']:
     if drop['timestamp'] not in timestamp_map:
         timestamp_map[drop['timestamp']] = set()
@@ -68,8 +116,10 @@ for timestamp, columns in timestamp_map.items():
         if len(columns) > max_columns:
             solutions.clear()
             max_columns = len(columns)
-        solutions.append({'timestamp': timestamp, 'columns': list(columns)})`}
-        </pre>
+        solutions.append({
+            'timestamp': timestamp,
+            'columns': sorted(list(columns))
+        })`} language="python" />
       </div>
     ),
     Java: (
@@ -77,9 +127,8 @@ for timestamp, columns in timestamp_map.items():
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           Java
         </h2>
-        <pre className="bg-emerald-900/20 p-4 rounded-lg text-sm overflow-auto">
-          {`Map<Integer, Set<Integer>> timestampMap = new HashMap<>();
-for (Drop drop : parsedData.getDrops())
+        <CopyableCode code={`Map<Integer, Set<Integer>> timestampMap = new HashMap<>();
+for (Drop drop : parsedData.getDrops()) {
     timestampMap.putIfAbsent(drop.getTimestamp(), new HashSet<>());
     timestampMap.get(drop.getTimestamp()).add(drop.getColumn());
 }
@@ -94,10 +143,11 @@ for (Map.Entry<Integer, Set<Integer>> entry : timestampMap.entrySet()) {
             solutions.clear();
             maxColumns = columns.size();
         }
-        solutions.add(new Solution(timestamp, new ArrayList<>(columns)));
+        List<Integer> sortedColumns = new ArrayList<>(columns);
+        Collections.sort(sortedColumns);
+        solutions.add(new Solution(timestamp, sortedColumns));
     }
-}`}
-        </pre>
+}`} language="java" />
       </div>
     ),
     "C++": (
@@ -105,8 +155,7 @@ for (Map.Entry<Integer, Set<Integer>> entry : timestampMap.entrySet()) {
         <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
           C++
         </h2>
-        <pre className="bg-emerald-900/20 p-4 rounded-lg text-sm overflow-auto">
-          {`std::unordered_map<int, std::unordered_set<int>> timestampMap;
+        <CopyableCode code={`std::unordered_map<int, std::unordered_set<int>> timestampMap;
 for (const auto& drop : parsedData.drops) {
     timestampMap[drop.timestamp].insert(drop.column);
 }
@@ -119,10 +168,64 @@ for (const auto& [timestamp, columns] : timestampMap) {
             solutions.clear();
             maxColumns = columns.size();
         }
-        solutions.push_back({timestamp, std::vector<int>(columns.begin(), columns.end())});
+        std::vector<int> sortedColumns(columns.begin(), columns.end());
+        std::sort(sortedColumns.begin(), sortedColumns.end());
+        solutions.push_back({timestamp, sortedColumns});
     }
-}`}
-        </pre>
+}`} language="cpp" />
+      </div>
+    ),
+    Rust: (
+      <div>
+        <h2 className="text-2xl font-mono font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
+          Rust
+        </h2>
+        <CopyableCode code={`use std::collections::{HashMap, HashSet};
+
+#[derive(Debug)]
+struct Raindrop {
+    timestamp: u32,
+    column: u32,
+}
+
+#[derive(Debug)]
+struct Solution {
+    timestamp: u32,
+    columns: Vec<u32>,
+}
+
+fn find_max_columns(drops: &[Raindrop]) -> Vec<Solution> {
+    let mut timestamp_map: HashMap<u32, HashSet<u32>> = HashMap::new();
+    
+    // Group drops by timestamp
+    for drop in drops {
+        timestamp_map
+            .entry(drop.timestamp)
+            .or_insert_with(HashSet::new)
+            .insert(drop.column);
+    }
+    
+    let mut max_columns = 0;
+    let mut solutions = Vec::new();
+    
+    // Find timestamps with maximum unique columns
+    for (timestamp, columns) in timestamp_map {
+        if columns.len() >= max_columns {
+            if columns.len() > max_columns {
+                solutions.clear();
+                max_columns = columns.len();
+            }
+            let mut sorted_columns: Vec<u32> = columns.into_iter().collect();
+            sorted_columns.sort_unstable();
+            solutions.push(Solution {
+                timestamp,
+                columns: sorted_columns,
+            });
+        }
+    }
+    
+    solutions
+}`} language="rust" />
       </div>
     ),
   };
@@ -179,21 +282,23 @@ for (const auto& [timestamp, columns] : timestampMap) {
 
       <main className="flex-grow z-10 container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <h1 className="text-3xl font-mono font-bold mb-6 text-center">Code Structure</h1>
-          <div className="mb-4 w-full max-w-xs">
+          <h1 className="text-4xl font-mono font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-300">
+            Implementation Details
+          </h1>
+          <div className="mb-6 w-full max-w-xs">
             <select
               value={view}
               onChange={(e) => setView(e.target.value as ViewType)}
-              className="w-full px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 text-emerald-100"
+              className="w-full px-4 py-2 rounded-lg bg-emerald-900/60 border border-emerald-600/40 text-emerald-100 backdrop-blur-sm transition-all hover:bg-emerald-900/70 hover:border-emerald-600/50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
             >
               {Object.keys(codeViews).map((key) => (
-                <option key={key} value={key}>
+                <option key={key} value={key} className="bg-black text-emerald-300">
                   {key}
                 </option>
               ))}
             </select>
           </div>
-          <div className="w-full bg-black/50 backdrop-blur-sm border border-emerald-800/50 rounded-lg p-6 shadow-lg">
+          <div className="w-full bg-black/50 backdrop-blur-sm border border-emerald-800/50 rounded-lg p-6 shadow-lg transition-all hover:shadow-emerald-900/20">
             {codeViews[view]}
           </div>
         </div>
@@ -216,14 +321,7 @@ for (const auto& [timestamp, columns] : timestampMap) {
             <div className="text-xs text-emerald-400/60 font-mono">
               &copy; {new Date().getFullYear()} Team 78. All rights reserved.
             </div>
-            <div className="mt-4 md:mt-0">
-              <Link
-                href="/input"
-                className="text-sm font-mono text-emerald-400/80 hover:text-emerald-300"
-              >
-                Try Another Input
-              </Link>
-            </div>
+
           </div>
         </div>
       </footer>
