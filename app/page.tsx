@@ -228,7 +228,12 @@ export default function Home() {
                   </p>
                 </div>
               </a>
-              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex items-center opacity-70">
+              <a
+                href="https://docs.google.com/presentation/d/1ioCnC4oHyE2AMuDXW4gZr2b-sVchCq9ZRyZy2f7NhAA/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex items-center"
+              >
                 <div className="w-10 h-10 bg-emerald-900/40 rounded-full flex items-center justify-center mr-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -247,9 +252,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold text-emerald-300">Presentation</h3>
-                  <p className="text-sm text-emerald-200/70">Coming soon...</p>
+                  <p className="text-sm text-emerald-200/70">View our project presentation</p>
                 </div>
-              </div>
+              </a>
             </div>
           </section>
         </div>
