@@ -137,6 +137,12 @@ export default function SolutionPage() {
               Demo
             </Link>
             <Link
+              href="/code"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              Code
+            </Link>
+            <Link
               href="https://github.com/AetherSparks/Digital-Raindrop-Displayer"
               target="_blank"
               className="hover:text-emerald-300 hover:underline underline-offset-4"
@@ -359,6 +365,12 @@ export default function SolutionPage() {
               className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm"
             >
               Try Another Input
+            </Link>
+            <Link
+              href="/code"
+              className="px-4 py-2 rounded-md bg-emerald-900/60 border border-emerald-600/40 hover:bg-emerald-800/70 transition-all text-sm"
+            >
+              View Code Structure
             </Link>
           </div>
         </div>

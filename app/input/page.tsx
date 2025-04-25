@@ -138,6 +138,12 @@ export default function InputPage() {
               Demo
             </Link>
             <Link
+              href="/code"
+              className="hover:text-emerald-300 hover:underline underline-offset-4"
+            >
+              Code
+            </Link>
+            <Link
               href="https://github.com/AetherSparks/Digital-Raindrop-Displayer"
               target="_blank"
               className="hover:text-emerald-300 hover:underline underline-offset-4"
