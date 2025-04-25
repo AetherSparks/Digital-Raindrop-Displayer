@@ -13,8 +13,7 @@ export default function InputPage() {
 
   const generateRandomData = () => {
     const data = [];
-    data.push(`${columns} ${drops}`);
-    
+    // Remove N M line since we have dropdowns
     // Generate random drops
     for (let i = 0; i < drops; i++) {
       const timestamp = Math.floor(Math.random() * 5) + 1; // Random timestamp between 1-5
@@ -126,7 +125,7 @@ export default function InputPage() {
                 value={inputData}
                 onChange={(e) => setInputData(e.target.value)}
                 className="w-full h-48 bg-black/40 border border-emerald-800/30 rounded-lg p-4 text-emerald-300 font-mono focus:border-emerald-600/50 focus:outline-none"
-                placeholder="Format:&#13;&#10;N M&#13;&#10;timestamp1 column1&#13;&#10;timestamp2 column2&#13;&#10;..."
+                placeholder="Format:&#13;&#10;timestamp1 column1&#13;&#10;timestamp2 column2&#13;&#10;timestamp3 column3&#13;&#10;..."
               />
             </div>
 
