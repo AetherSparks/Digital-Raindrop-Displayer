@@ -42,7 +42,11 @@ Our solution efficiently processes the rainfall data through:
 - **State Management**: React Hooks
 - **Build Tool**: PNPM
 
-## 🚀 Getting Started
+## Check out our Live Website
+- [Project Website](https://digital-raindrop-displayer.vercel.app/)
+
+
+## 🚀 Clone the Code and Share your ideas
 
 1. Clone the repository:
 \`\`\`bash
@@ -65,10 +69,9 @@ pnpm dev
 
 - **Abhiraj Ghose** (e23cseu0014) - Team Leader
 - **Pallav Sharma** (e23cseu0022) - Team Member
-- **Shivam Jain** (e23cseu0017) - Team Member
 
 ## 🔗 Links
-
+- [Project Website](https://digital-raindrop-displayer.vercel.app/)
 - [GitHub Repository](https://github.com/AetherSparks/Digital-Raindrop-Displayer)
 - [Project Presentation](https://docs.google.com/presentation/d/1ioCnC4oHyE2AMuDXW4gZr2b-sVchCq9ZRyZy2f7NhAA/edit?usp=sharing)
 
