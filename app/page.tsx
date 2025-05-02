@@ -72,7 +72,7 @@ export default function Home() {
               </h1>
             </div>
             <p className="text-lg md:text-xl text-emerald-300/90 mb-8 font-mono">
-              Visualizing and solving the matrix rain problem
+              Visualizing and solving the matrix rain problem...
             </p>
             <Link
               href="/input"
