@@ -127,7 +127,7 @@ export default function Home() {
               <span className="inline-block w-2 h-6 bg-emerald-500 mr-3"></span>
               Team 78
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
                 <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
                   Abhiraj Ghose
@@ -145,17 +145,6 @@ export default function Home() {
                 </h3>
                 <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
                   E23CSEU0022
-                </p>
-                <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
-                  Team Member
-                </p>
-              </div>
-              <div className="bg-black/40 p-4 rounded-lg border border-emerald-800/30 hover:border-emerald-600/50 transition-all flex flex-col items-center justify-center min-h-[120px] group hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-105 duration-300">
-                <h3 className="text-lg font-bold text-emerald-300 text-center group-hover:text-emerald-200">
-                  Shivam Jain
-                </h3>
-                <p className="text-emerald-200/70 font-mono text-center group-hover:text-emerald-300/80">
-                  E23CSEU0017
                 </p>
                 <p className="text-emerald-400/80 text-sm text-center group-hover:text-emerald-300">
                   Team Member
