@@ -4,7 +4,7 @@
 
 
 
-An interactive web application that visualizes and solves the digital rainfall problem, developed for AlgoNet Hackathon by Team 78.
+An interactive web application that visualizes and solves the digital rainfall problem, developed for AlgoNet Hackathon by Team 78, comprising of Abhiraj Ghose(E23CSEU0014) and Pallav Sharma(E23CSEU0022)
 
 ## 🚀 Features
 
